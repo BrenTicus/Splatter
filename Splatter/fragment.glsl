@@ -32,5 +32,5 @@ void main(void)
 	vec3 specular = pow(max(dot(R, V), 0.0), specular_power) * specular_albedo;
 
 	// Write final color to the framebuffer
-	color = vec4(ambient + diffuse + specular, pow(asin(dot(V, N)), 1/2f));
+	color = vec4(ambient + diffuse + specular, pow(asin(dot(V, N)), 1/3f));
 }
