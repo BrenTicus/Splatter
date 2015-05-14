@@ -131,7 +131,10 @@ void setupRenderingContext(ShaderInfo* shader)
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_PROGRAM_POINT_SIZE);
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ZERO);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glPointParameterf(GL_POINT_SIZE_MAX, 100.0f);
+	glPointParameterf(GL_POINT_FADE_THRESHOLD_SIZE, 100.0f);
 
 	// Set up and compile the shaders.
 	GLuint hVertexShader = glCreateShader(GL_VERTEX_SHADER);

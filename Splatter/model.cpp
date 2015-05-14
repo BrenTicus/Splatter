@@ -157,7 +157,7 @@ Figure out how big each splat should be.
 void Model::findPointSizes()
 {
 	sBuffer.resize(vBuffer.size(), 0.0f);
-	float splatScale = 15.0f;
+	float splatScale = 100.0f;
 	float nRoot = 1 / 3.0f;
 	int a, b, c;
 	for (unsigned int i = 0; i < viBuffer.size(); i += 3)
@@ -168,12 +168,12 @@ void Model::findPointSizes()
 		
 		// Splat size is based on the longest distance to a connecting vertex.
 		// TODO: Do this better.
-		sBuffer[a] = glm::max(sBuffer[a], splatScale * powf(glm::length(vBuffer[a] - vBuffer[b]), nRoot));
-		sBuffer[a] = glm::max(sBuffer[a], splatScale * powf(glm::length(vBuffer[a] - vBuffer[c]), nRoot));
-		sBuffer[b] = glm::max(sBuffer[a], splatScale * powf(glm::length(vBuffer[b] - vBuffer[a]), nRoot));
-		sBuffer[b] = glm::max(sBuffer[a], splatScale * powf(glm::length(vBuffer[b] - vBuffer[c]), nRoot));
-		sBuffer[c] = glm::max(sBuffer[a], splatScale * powf(glm::length(vBuffer[c] - vBuffer[a]), nRoot));
-		sBuffer[c] = glm::max(sBuffer[a], splatScale * powf(glm::length(vBuffer[c] - vBuffer[b]), nRoot));
+		sBuffer[a] = glm::max(sBuffer[a], splatScale * glm::length(vBuffer[a] - vBuffer[b]));
+		sBuffer[a] = glm::max(sBuffer[a], splatScale * glm::length(vBuffer[a] - vBuffer[c]));
+		sBuffer[b] = glm::max(sBuffer[a], splatScale * glm::length(vBuffer[b] - vBuffer[a]));
+		sBuffer[b] = glm::max(sBuffer[a], splatScale * glm::length(vBuffer[b] - vBuffer[c]));
+		sBuffer[c] = glm::max(sBuffer[a], splatScale * glm::length(vBuffer[c] - vBuffer[a]));
+		sBuffer[c] = glm::max(sBuffer[a], splatScale * glm::length(vBuffer[c] - vBuffer[b]));
 	}
 }
 
